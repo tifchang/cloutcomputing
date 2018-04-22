@@ -12,9 +12,69 @@
 </head>
 
 <body>
-    <div class="title">
-        <h1 class="title is-3">How to Build Clout</h1>
+    <div class="titles">
+        <h1 class="title titles is-3">How to Build Clout</h1>
         <h2 class="subtitle is-5">Twitter analytics on driving top Tweet performance.</h2>
     </div>
+    <div class="spacer-5em"></div>
+    <h2 class="title is-5">Introduction</h2>
+    <p>
+        How do top Tweeters gain popularity? What specifically about their posts are engaging 
+        and have contributed to their dominant Twitter following? This analysis aims to uncover
+        the truth and reveal tactics underlying top Twitter users (i.e., users with the highest 
+        number of followers). Through this analysis, I hope to reveal patterns, similaries, and 
+        differences in their Twitter usage and content that contribute to the user's success.
+        The revealed truths can be complemented and further understood by the user's personality, 
+        perception, and overall profile.
+    </p>
+    <div class="spacer-5em"></div>
+    <h2 class="title is-5">Data Sources</h2>
+    <p>
+        This analysis samples from the Top 10 Twitter accounts in terms of two types of accounts: 
+        pop culture figures and political figures. Using the <code>twitteR</code> packages, I 
+        access <a href="http://twitter.com/justinbieber">@justinbieber</a>, <a href="http://twitter.com/KimKardashian">@KimKardashian</a>,
+        <a href="http://twitter.com/barackobama">@BarackObama</a>, and <a href="http://twitter.com/realDonaldTrump">@realDonaldTrump</a>'s posts.
+    </p>
+    <div class="spacer-5em"></div>
+    <h2 class="title is-5">Sentiment</h2>
+    <div class="card-container">
+        <!-- Justin Bieber Card -->
+        <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Proud of these kids <a href="https://t.co/M796VNgWWV">pic.twitter.com/M796VNgWWV</a></p>&mdash; Justin Bieber (@justinbieber) <a href="https://twitter.com/justinbieber/status/976131121518804992?ref_src=twsrc%5Etfw">March 20, 2018</a></blockquote>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+        <div class="spacer-1emh"></div>
+        <p style="width: 40%"> <br>
+            From a qualitative point of view, Justin Bieber typically uses his Twitter account
+            for music and album promotion as well as a vector for social cause advocacy. Therefore, 
+            we can see that his tweets are relatively neutral and positive when praising and commending 
+            groups for their effort related to a social cause. For example, he made numerous posts for 
+            the <a href="https://twitter.com/AMarch4OurLives">#MarchForOurLives</a> campaign and commended student groups for their efforts.
+        </p>
+    </div>
+    <div class="spacer-5em"></div>
+    <!-- Donald Trump Card -->
+    <div class="card">
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-left">
+                    <figure class="image is-48x48">
+                        <img src="dt.jpg" alt="Placeholder image" class="circle">
+                    </figure>
+                    </div>
+                    <div class="media-content">
+                    <p class="title is-4">Donald Trump</p>
+                    <p class="subtitle is-6">@realDonaldTrump  | <time datetime="2016-1-1">12 Apr 2018</time></p>
+                    
+                    </div>
+                </div>
+            
+                <div class="content">
+                        So General Michael Flynn’s life can be totally destroyed while Shadey James Comey can Leak and Lie and make lots of money from a third rate book (that should never have been written). Is that really the way life in America is supposed to work? I don’t think so!
+                    <br>
+                </div>
+                </div>
+        </div>
+    
+    
 </body>
 </html>

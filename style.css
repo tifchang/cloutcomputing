@@ -5,11 +5,20 @@ body {
     display: flex;
     flex-direction: column;
   }
-.title {
+.titles {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+.circle {
+    border-radius: 100px !important;
+}
+.card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* justify-content: space-evenly; */
 }
 h1 {
     font-family: 'Playfair Display', serif !important;
@@ -42,6 +51,10 @@ i {
 .spacer-1em {
     height: 0.5em;
     width: 100%;
+}
+.spacer-1emh {
+    width: 1em;
+    height: 50px;
 }
 .spacer-5em {
     height: 5em;
