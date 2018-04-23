@@ -52,11 +52,20 @@ i {
     height: 0.5em;
     width: 100%;
 }
-.spacer-1emh {
-    width: 1em;
+.spacer-5emh {
+    width: 3em;
     height: 50px;
 }
 .spacer-5em {
     height: 5em;
     width: 100%;
+}
+.spacer-3em {
+    height: 3em;
+    width: 100%;
+}
+.flexrow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }

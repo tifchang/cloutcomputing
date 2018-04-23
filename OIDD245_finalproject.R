@@ -52,6 +52,10 @@ jdtm_matrix = as.matrix(jdtm)
 
 jsentiment.avg = mean(get_sentiment(jdf$Content, method="afinn"))
 jsentiment = get_sentiment(jdf$Content, method="afinn")
+js_df = as.data.frame(jsentiment)
+js_df$Tweet = c(1:nrow(js_df))
+names(js_df)[1] = "Emotion"
+ggplot(js_df, aes(x=Tweet, y=Emotion)) + geom_point() + stat_smooth(colour="#f22e2e") + geom_hline(yintercept=0)
 
 # Create df of Kim Kardashian's Tweets
 k = cbind(k, sapply(k_tweets, function (x) x$getRetweetCount()))
@@ -102,7 +106,7 @@ dsentiment = get_sentiment(ddf$Content, method="afinn")
 ds_df = as.data.frame(dsentiment)
 #ds_df$Tweet = c(1:330)
 #names(ds_df)[1] = "Emotion"
-ggplot(ds_df, aes(x=Tweet, y=Emotion)) + geom_point() + stat_smooth(colour="#f22e2e") + geom_hline(yintercept=0)
+ggplot(ds_df, aes(x=Tweet, y=Emotion)) + geom_point() + stat_smooth(colour="#C6FF00") + geom_hline(yintercept=0)
 
 c = read.csv("tiff_created.csv")
 cdf = as.data.frame(c)
