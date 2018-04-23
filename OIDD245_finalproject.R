@@ -50,7 +50,7 @@ jcorp = tm_map(jcorp, stripWhitespace, lazy=TRUE)
 jdtm = DocumentTermMatrix(jcorp)
 jdtm_matrix = as.matrix(jdtm)
 
-jt_ldaOut <-LDA(jdtm_matrix, 4, method="Gibbs")
+jt_ldaOut <-LDA(jdtm_matrix, 3, method="Gibbs")
 terms(jt_ldaOut, 10)
 
 jsentiment.avg = mean(get_sentiment(jdf$Content, method="afinn"))
