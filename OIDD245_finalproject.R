@@ -22,7 +22,7 @@ setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
 #searchTwitter(paste0('from:', "@kimkardashian"), n=100)
 
 # Create df of Justin Bieber's Tweets
-j_tweets = userTimeline("justinbieber", n=500, includeRts = F, excludeReplies = T)
+j_tweets = userTimeline("katyperry", n=500, includeRts = F, excludeReplies = T)
 k_tweets = userTimeline("kimkardashian", n=500, includeRts = F, excludeReplies = T)
 b_tweets = userTimeline("BarackObama", n=500, includeRts = F, excludeReplies = T)
 d_tweets = userTimeline("realdonaldtrump", n=500, includeRts = F, excludeReplies = T)
@@ -49,6 +49,9 @@ jcorp = tm_map(jcorp, content_transformer(stemDocument) ,lazy=TRUE)
 jcorp = tm_map(jcorp, stripWhitespace, lazy=TRUE)
 jdtm = DocumentTermMatrix(jcorp)
 jdtm_matrix = as.matrix(jdtm)
+
+jt_ldaOut <-LDA(jdtm_matrix, 4, method="Gibbs")
+terms(jt_ldaOut, 10)
 
 jsentiment.avg = mean(get_sentiment(jdf$Content, method="afinn"))
 jsentiment = get_sentiment(jdf$Content, method="afinn")
@@ -107,6 +110,10 @@ ds_df = as.data.frame(dsentiment)
 #ds_df$Tweet = c(1:330)
 #names(ds_df)[1] = "Emotion"
 ggplot(ds_df, aes(x=Tweet, y=Emotion)) + geom_point() + stat_smooth(colour="#C6FF00") + geom_hline(yintercept=0)
+dt_ldaOut <-LDA(ddtm_matrix, 4, method="Gibbs")
+terms(dt_ldaOut, 10)
+
+
 
 c = read.csv("tiff_created.csv")
 cdf = as.data.frame(c)
