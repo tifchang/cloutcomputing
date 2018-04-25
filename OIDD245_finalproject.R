@@ -21,12 +21,13 @@ setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
 
 #searchTwitter(paste0('from:', "@kimkardashian"), n=100)
 
-# Create df of Justin Bieber's Tweets
+# Get Tweets
 j_tweets = userTimeline("katyperry", n=500, includeRts = F, excludeReplies = T)
 k_tweets = userTimeline("kimkardashian", n=500, includeRts = F, excludeReplies = T)
 b_tweets = userTimeline("BarackObama", n=500, includeRts = F, excludeReplies = T)
 d_tweets = userTimeline("realdonaldtrump", n=500, includeRts = F, excludeReplies = T)
 
+# Create df of Katy Perry's Tweets
 j= NULL
 j = cbind(j, sapply(j_tweets, function (x) x$getRetweetCount()))
 j = cbind(j, sapply(j_tweets, function (x) x$getText()))
@@ -57,18 +58,44 @@ jsentiment.avg = mean(get_sentiment(jdf$Content, method="afinn"))
 jsentiment = get_sentiment(jdf$Content, method="afinn")
 js_df = as.data.frame(jsentiment)
 js_df$Tweet = c(1:nrow(js_df))
+jdf$Sentiment = cbind(jsentiment)
 names(js_df)[1] = "Emotion"
 ggplot(js_df, aes(x=Tweet, y=Emotion)) + geom_point() + stat_smooth(colour="#f22e2e") + geom_hline(yintercept=0)
 
 # Create df of Kim Kardashian's Tweets
+k = NULL
 k = cbind(k, sapply(k_tweets, function (x) x$getRetweetCount()))
 k = cbind(k, sapply(k_tweets, function (x) x$getText()))
 k = cbind(k, sapply(k_tweets, function (x) x$getScreenName()))
 k = cbind(k, sapply(k_tweets, function (x) x$getId()))
 k = cbind(k, sapply(k_tweets, function (x) x$getCreated()))
+k = cbind(k, ifelse(str_detect(k[,2], "https"), 1, 0))
 kdf = as.data.frame(k)
 names(kdf) = c("Retweet Count", "Content", "Author", "Id", "Created")
+kdf$Content = gsub("[^[:alnum:]///' ]", "", kdf$Content)
 View(kdf)
+
+kcorp.original <- VCorpus(VectorSource(kdf$Content))
+kcorp = tm_map(kcorp.original, removePunctuation) 
+kcorp = tm_map(kcorp, removeNumbers) 
+kcorp = tm_map(kcorp, content_transformer(tolower) ,lazy=TRUE) 
+kcorp = tm_map(kcorp, content_transformer(removeWords), stopwords("english") ,lazy=TRUE)
+kcorp = tm_map(kcorp, content_transformer(stemDocument) ,lazy=TRUE) 
+kcorp = tm_map(kcorp, stripWhitespace, lazy=TRUE)
+kdtm = DocumentTermMatrix(kcorp)
+kdtm_matrix = as.matrix(kdtm)
+
+kt_ldaOut <-LDA(kdtm_matrix, 3, method="Gibbs")
+terms(kt_ldaOut, 10)
+
+ksentiment.avg = mean(get_sentiment(kdf$Content, method="afinn"))
+ksentiment = get_sentiment(kdf$Content, method="afinn")
+kdf$Sentiment = cbind(kdf, ksentiment)
+ks_df = as.data.frame(ksentiment)
+ks_df$Tweet = c(1:nrow(ks_df))
+names(ks_df)[1] = "Emotion"
+ggplot(ks_df, aes(x=Tweet, y=Emotion)) + geom_point() + stat_smooth(colour="#FF4081") + geom_hline(yintercept=0)
+
 
 # Create df of Barack Obama's Tweets
 b = NULL
