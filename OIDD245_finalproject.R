@@ -12,6 +12,8 @@ library(httr)
 library(magrittr)
 library(twitteR)
 library(anytime)
+library(class)
+library(randomForest)
 
 consumer_key = "gxOUpkuB7sLWsB1RI3KfRqjPu"
 consumer_secret = "eW3fQUkBHdZM24cOJTOeEug3IsEcxsi0nBjecLdqKJp6QhcYpI"
@@ -137,11 +139,12 @@ d = cbind(d, sapply(d_tweets, function (x) x$getText()))
 d = cbind(d, sapply(d_tweets, function (x) x$getScreenName()))
 d = cbind(d, sapply(d_tweets, function (x) x$getId()))
 d = cbind(d, sapply(d_tweets, function (x) x$getCreated()))
-d = cbind(d, ifelse(str_detect(j[,2], "https"), 1, 0))
+d = cbind(d, ifelse(str_detect(d[,2], "https"), 1, 0))
 ddf = as.data.frame(d)
 names(ddf) = c("Retweet Count", "Content", "Author", "Id", "Created", "Link")
 ddf$Content = gsub("[^[:alnum:]///' ]", "", ddf$Content)
 View(ddf)
+
 
 dcorp.original <- VCorpus(VectorSource(ddf$Content))
 dcorp = tm_map(dcorp.original, removePunctuation) 
@@ -151,7 +154,9 @@ dcorp = tm_map(dcorp, content_transformer(removeWords), stopwords("english") ,la
 dcorp = tm_map(dcorp, content_transformer(stemDocument) ,lazy=TRUE) 
 dcorp = tm_map(dcorp, stripWhitespace, lazy=TRUE)
 dtm = DocumentTermMatrix(dcorp)
+dtm = removeSparseTerms(dtm, .990)
 dtm_matrix = as.matrix(dtm)
+View(dtm_matrix)
 
 dsentiment.avg = mean(get_sentiment(ddf$Content, method="afinn"))
 dsentiment = get_sentiment(ddf$Content, method="afinn")
@@ -163,6 +168,32 @@ dt_ldaOut <-LDA(dtm_matrix, 3, method="Gibbs")
 terms(dt_ldaOut, 10)
 
 
-c = read.csv("tiff_created.csv")
-cdf = as.data.frame(c)
-cdf$Y = anytime(cdf$x)
+#Donald Trump Tweet Model
+par = read.csv("par.csv", sep = ",")
+pardf = as.data.frame(par)
+View(pardf)
+pardf$UnixStart = as.numeric(as.POSIXct(pardf$Start))
+pardf$UnixEnd = as.numeric(as.POSIXct(pardf$End))
+
+View(ddf)
+
+for (i in 1:nrow(ddf)) {
+  for (j in 1:nrow(pardf)) {
+    if ((as.numeric(ddf$Created[i]) <= as.numeric(pardf$UnixEnd[j]))) {
+      print("IN THIS 1")
+      if ((as.numeric(ddf$Created[i]) >= as.numeric(pardf$UnixStart[j]))) {
+        print("IN THIS 2")
+        ddf$PAR_A[i] = pardf$Approve[j]
+        break
+      }
+    }
+  }
+}
+
+dt_mega = dt_mega[complete.cases(dtm_matrix), ]
+train = droplevels(head(dt_mega, nrow(dt_mega) * 0.8))
+test = droplevels(tail(dt_mega, nrow(dt_mega) * 0.2))
+
+rf = randomForest(`Retweet Count` ~ ., data = train)
+
+dim(train)

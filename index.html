@@ -20,26 +20,26 @@
 <body>
     <div class="titles">
         <h1 class="title titles is-3">Clout Computing</h1>
-        <h2 class="subtitle is-5">
-            Understanding and forecasting top Twitter performance through text mining
+        <h2 class="subtitle is-5" style="text-align: center;">
+            Understanding and forecasting Trump's Twitter performance and approval <br>through text mining
             &amp; machine learning.
         </h2>
     </div>
     <div class="spacer-5em"></div>
     <h2 class="title is-5">Introduction</h2>
     <p>
-        How do top Tweeters gain popularity? What specifically about their posts are engaging 
+        How does Trump gain followers and so much engagement on Twitter? What specifically about his posts are engaging 
         and have contributed to their dominant Twitter following? This analysis aims to uncover
-        the truth and reveal tactics underlying top Twitter users (i.e., users with the highest 
-        number of followers). Through this analysis, I hope to reveal patterns, similaries, and 
-        differences in their Twitter usage and content that contribute to the user's success.
-        The revealed truths can be complemented and further understood by the user's personality, 
-        perception, and overall profile.
+        the truth and reveal tactics underlying his tweets. Through this analysis, I hope to reveal patterns, similaries, and 
+        differences in their Twitter usage and content that contribute to the user's success. At the end, I will build a 
+        model to predict the popularity of Trump's tweet given a hypothetical string. You will also get a shot to see if your 
+        Trump tweet scores well.
     </p>
     <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
     <h2 class="title is-5">Data Sources</h2>
     <p>
-        This analysis samples from the Top 10 Twitter accounts in terms of two types of accounts: 
+        This analysis focuses on Trump but samples from other Top 10 Twitter accounts in order to compare and contrast Trump's 
+        account with other high performing accounts. I chose two types of accounts within and outside the same domain: 
         pop culture figures and political figures. Using the <code>twitteR</code> packages, I 
         access <a href="http://twitter.com/katyperry">@katyperry</a>, <a href="http://twitter.com/KimKardashian">@KimKardashian</a>,
         <a href="http://twitter.com/barackobama">@BarackObama</a>, and <a href="http://twitter.com/realDonaldTrump">@realDonaldTrump</a>'s posts.
@@ -48,7 +48,7 @@
         of these specific figures to see if their Twitter presence is correlated to their overall relevance and 
         popularity.
         <br><br>
-        Lastly, to compare and contrast the two Presidents, I will be scraping  
+        Lastly, to add a new dimension to Trump's model, I will be scraping  
         <a href="http://www.presidency.ucsb.edu/data/popularity.php">Presidential Approval Ratings</a> over time.
     </p>
     <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
@@ -158,8 +158,9 @@
     </div>
     <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
     <h2 class="title is-5">What do Presidents tweet about?</h2>
+    <h4 class="subtitle is-6">Topics behind high performing political accounts</h4>
     <div class="card-container">
-        <img src="dt.gif" style="width: 300px; height: 200px;">
+        <img src="dt.gif" style="width: 300px; height: 220px;">
         <p style="width: 700px">
             I executed an LDA analysis on various topics these accounts discuss. Political figures showed 
             more variation in their topics in comparison to pop culture idols. Below shows the defined topics and 
@@ -209,24 +210,24 @@
                     <th>Supreme Court</th>
                 </tr>
                 <tr>
-                    <td>America</td>
-                    <td>Climate</td>
-                    <td>Supreme</td>
+                    <td><a href="https://twitter.com/BarackObama/status/946775615893655552">America</a></td>
+                    <td><a href="https://twitter.com/BarackObama/status/791754307347492864">Climate</a></td>
+                    <td><a href="https://twitter.com/BarackObama/status/792045944384749569">Supreme</a></td>
                 </tr>
                 <tr>
-                    <td>Join</td>
-                    <td>Job</td>
-                    <td>Court</td>
+                    <td><a href="https://twitter.com/BarackObama/status/921889369337860096">Join</a></td>
+                    <td><a href="https://twitter.com/BarackObama/status/964185606803853314">Job</a></td>
+                    <td><a href="https://twitter.com/BarackObama/status/792020035430735872">Court</a></td>
                 </tr>
                 <tr>
-                    <td>One</td>
-                    <td>Help</td>
-                    <td>Justice</td>
+                    <td><a href="https://twitter.com/BarackObama/status/896523232098078720">One</a></td>
+                    <td><a href="https://twitter.com/BarackObama/status/946775467536928768">Help</a></td>
+                    <td><a href="https://twitter.com/BarackObama/status/788803700286291969">Justice</a></td>
                 </tr>
                 <tr>
-                    <td>Team</td>
-                    <td>Fight</td>
-                    <td>Garland</td>
+                    <td><a href="https://twitter.com/BarackObama/status/789205082210390018">Team</a></td>
+                    <td><a href="https://twitter.com/BarackObama/status/784099769425596418">Fight</a></td>
+                    <td><a href="https://twitter.com/BarackObama/status/788039460411682817">Garland</a></td>
                 </tr>
         </thead>
     </table>
@@ -238,6 +239,11 @@
         Given the limited topics, it was difficult to do a compare &amp; contrast analysis across types of users but 
         interesting to see the clean cut topics among political figures. Political figures seem to be more dynamic in their 
         topics in comparison to pop culture figures.
+    </p>
+    <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
+    <h2 class="title is-5">Does Twitter clout convert to Approval Ratings?</h2>
+    <p>
+        Build model out of Trump's words, and other factors
     </p>
     <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
     <h2 class="title is-5">Next Steps</h2>
