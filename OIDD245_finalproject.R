@@ -38,7 +38,6 @@ j = cbind(j, ifelse(str_detect(j[,2], "https"), 1, 0))
 jdf = as.data.frame(j)
 names(jdf) = c("Retweet Count", "Content", "Author", "Id", "Created", "Contains Link")
 jdf$Content = gsub("[^[:alnum:]///' ]", "", jdf$Content)
-jdf$Datetime = anytime(jdf$Created)
 View(jdf)
 
 jcorp.original <- VCorpus(VectorSource(jdf$Content))
@@ -51,7 +50,7 @@ jcorp = tm_map(jcorp, stripWhitespace, lazy=TRUE)
 jdtm = DocumentTermMatrix(jcorp)
 jdtm_matrix = as.matrix(jdtm)
 
-jt_ldaOut <-LDA(jdtm_matrix, 3, method="Gibbs")
+jt_ldaOut <-LDA(jdtm_matrix, 2, method="Gibbs")
 terms(jt_ldaOut, 10)
 
 jsentiment.avg = mean(get_sentiment(jdf$Content, method="afinn"))
@@ -71,7 +70,7 @@ k = cbind(k, sapply(k_tweets, function (x) x$getId()))
 k = cbind(k, sapply(k_tweets, function (x) x$getCreated()))
 k = cbind(k, ifelse(str_detect(k[,2], "https"), 1, 0))
 kdf = as.data.frame(k)
-names(kdf) = c("Retweet Count", "Content", "Author", "Id", "Created")
+names(kdf) = c("Retweet Count", "Content", "Author", "Id", "Created", "Link")
 kdf$Content = gsub("[^[:alnum:]///' ]", "", kdf$Content)
 View(kdf)
 
@@ -104,9 +103,32 @@ b = cbind(b, sapply(b_tweets, function (x) x$getText()))
 b = cbind(b, sapply(b_tweets, function (x) x$getScreenName()))
 b = cbind(b, sapply(b_tweets, function (x) x$getId()))
 b = cbind(b, sapply(b_tweets, function (x) x$getCreated()))
+b = cbind(b, ifelse(str_detect(b[,2], "https"), 1, 0))
 bdf = as.data.frame(b)
-names(bdf) = c("Retweet Count", "Content", "Author", "Id", "Created")
+names(bdf) = c("Retweet Count", "Content", "Author", "Id", "Created", "Contains Link")
+bdf$Content = gsub("[^[:alnum:]///' ]", "", bdf$Content)
 View(bdf)
+
+bcorp.original <- VCorpus(VectorSource(bdf$Content))
+bcorp = tm_map(bcorp.original, removePunctuation) 
+bcorp = tm_map(bcorp, removeNumbers) 
+bcorp = tm_map(bcorp, content_transformer(tolower) ,lazy=TRUE) 
+bcorp = tm_map(bcorp, content_transformer(removeWords), stopwords("english") ,lazy=TRUE)
+bcorp = tm_map(bcorp, content_transformer(stemDocument) ,lazy=TRUE) 
+bcorp = tm_map(bcorp, stripWhitespace, lazy=TRUE)
+bdtm = DocumentTermMatrix(bcorp)
+bdtm_matrix = as.matrix(bdtm)
+
+bt_ldaOut <-LDA(bdtm_matrix, 3, method="Gibbs")
+terms(bt_ldaOut, 10)
+
+bsentiment.avg = mean(get_sentiment(bdf$Content, method="afinn"))
+bsentiment = get_sentiment(bdf$Content, method="afinn")
+bdf$Sentiment = cbind(bdf, bsentiment)
+bs_df = as.data.frame(bsentiment)
+bs_df$Tweet = c(1:nrow(bs_df))
+names(bs_df)[1] = "Emotion"
+ggplot(bs_df, aes(x=Tweet, y=Emotion)) + geom_point() + stat_smooth(colour="#2196F3") + geom_hline(yintercept=0)
 
 # Create df of Donald Trump's Tweets
 d = NULL
@@ -128,8 +150,8 @@ dcorp = tm_map(dcorp, content_transformer(tolower) ,lazy=TRUE)
 dcorp = tm_map(dcorp, content_transformer(removeWords), stopwords("english") ,lazy=TRUE)
 dcorp = tm_map(dcorp, content_transformer(stemDocument) ,lazy=TRUE) 
 dcorp = tm_map(dcorp, stripWhitespace, lazy=TRUE)
-ddtm = DocumentTermMatrix(dcorp)
-ddtm_matrix = as.matrix(ddtm)
+dtm = DocumentTermMatrix(dcorp)
+dtm_matrix = as.matrix(dtm)
 
 dsentiment.avg = mean(get_sentiment(ddf$Content, method="afinn"))
 dsentiment = get_sentiment(ddf$Content, method="afinn")
@@ -137,9 +159,8 @@ ds_df = as.data.frame(dsentiment)
 #ds_df$Tweet = c(1:330)
 #names(ds_df)[1] = "Emotion"
 ggplot(ds_df, aes(x=Tweet, y=Emotion)) + geom_point() + stat_smooth(colour="#C6FF00") + geom_hline(yintercept=0)
-dt_ldaOut <-LDA(ddtm_matrix, 4, method="Gibbs")
+dt_ldaOut <-LDA(dtm_matrix, 3, method="Gibbs")
 terms(dt_ldaOut, 10)
-
 
 
 c = read.csv("tiff_created.csv")

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Top Tweeters</title>
+  <title>Clout Computing</title>
 
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
@@ -19,8 +19,11 @@
 
 <body>
     <div class="titles">
-        <h1 class="title titles is-3">Gaining Clout</h1>
-        <h2 class="subtitle is-5">Twitter analytics on driving top Tweet performance.</h2>
+        <h1 class="title titles is-3">Clout Computing</h1>
+        <h2 class="subtitle is-5">
+            Understanding and forecasting top Twitter performance through text mining
+            &amp; machine learning.
+        </h2>
     </div>
     <div class="spacer-5em"></div>
     <h2 class="title is-5">Introduction</h2>
@@ -33,7 +36,7 @@
         The revealed truths can be complemented and further understood by the user's personality, 
         perception, and overall profile.
     </p>
-    <div class="spacer-5em"></div>
+    <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
     <h2 class="title is-5">Data Sources</h2>
     <p>
         This analysis samples from the Top 10 Twitter accounts in terms of two types of accounts: 
@@ -48,8 +51,17 @@
         Lastly, to compare and contrast the two Presidents, I will be scraping  
         <a href="http://www.presidency.ucsb.edu/data/popularity.php">Presidential Approval Ratings</a> over time.
     </p>
-    <div class="spacer-5em"></div>
-    <h2 class="title is-5">Pop culture Sentiment</h2>
+    <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
+    <h2 class="title is-5">Do people gravitate towards positive tweets?</h2>
+    <p>
+        Looking into sentiment analysis across various users' tweets, I gained a broader understanding of the emotions 
+        users conveyed through their tweets. Intuitively, people would gravitate towards tweets that were either informative or 
+        made them feel good (positive/uplifting). But this analysis proves otherwise. <br><br>
+        First, I noticed that pop culture icons like Katy Perry and Kim Kardashian focus on promotional tweets, positive 
+        personal tweets, or uplifting feel-good tweets (cheesy one-liner life wisdom quotes). These tweets, especially the 
+        personal tweets, have performed highest.
+    </p>
+    <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
     <div class="card-container">
         <div style="width:350px">
             <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">even when you don’t believe in love, love believes in you. ❤️</p>&mdash; KATY PERRY (@katyperry) <a href="https://twitter.com/katyperry/status/983627056180224000?ref_src=twsrc%5Etfw">April 10, 2018</a></blockquote>
@@ -57,7 +69,7 @@
 
         </div>
         <div class="spacer-5emh"></div>
-        <p style="width: 600px"> <br>
+        <p style="width: 600px; color: #7b7b7b; font-size: 14px;"> <br>
             From a qualitative point of view, Katy Perry's account is dynamically positive. That means, she uses 
             her account to tweet positive messages across a variety of domains including general wellbeing messages (as seen above)
             her everyday life, music, and judging on American Idol. However, she has a large set of neutral tweets 
@@ -70,14 +82,14 @@
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
         <div class="spacer-5emh"></div>
-        <p style="width: 600px"> <br>
+        <p style="width: 600px; color: #7b7b7b; font-size: 14px;"> <br>
             Similar to Katy Perry's tweets, Kim Kardashian typically tweets about positive topics 
             such as her family, as well as promotional tweets for her latest makeup line. 
             Her highest performing tweets are those with images of her family, as seen to the left, and 
             "feel good" tweets.
         </p>
     </div>
-    <div class="card-container">
+    <div class="flexrow">
         <div>
             <div class="spacer-3em"></div>
             <h3 class="title is-6">Kim Kardashian's Tweet Sentiments</h3>
@@ -92,9 +104,15 @@
         </div>
     </div>  
     <p style="font-size: 12px; color: #7b7b7b">Katy Perry's one extremely low sentiment <a href="https://twitter.com/katyperry/status/914957859170988033">tweet</a> can be explained by her disgust towards the school shooting.</p>
-    <div class="spacer-3em"></div>
-    <h2 class="title is-5">Political Figure Sentiment</h2>
-    <h3 class="title is-6">Donald Trump's Polarizing Tweets</h3>
+    <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
+    <p>
+        However, Donald Trump's recent debut on Twitter in the past year has introduced a new dynamic of Twitter usage that has 
+        gained traction. The transparency with his thoughts and emotions has garnered traction to his platform. Social media 
+        has been criticized to be a platform for perfected perceptions put up by users. However, Trump gains traction through his dynamic 
+        sentiment and candor. As seen through the sentiment analysis, Trump exhibits a wider range and frequency of fluctuting emotional valence.
+    </p>
+    <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
+    <h3 class="title is-6">Donald Trump's Polar Tweets</h3>
     <h4 class="subtitle is-6">One tweet he's grateful and happy, another tweet he is sassy and angry.</h4>
     <div class="flexrow">
         <div>
@@ -109,10 +127,119 @@
     <div class="spacer-3em"></div>
     <div>
         <h3 class="title is-6">Donald Trump's Tweet Sentiments</h3>
-        <h4 class="subtitle is-6">Volatile and polarizing sentiments</h4>
+        <h4 class="subtitle is-6">Volatile and polar sentiments</h4>
         <img src="dt_sentiment.png" style="width:700px"/>
     </div>
-    <div class="spacer-5em"></div>
+    <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
+    <p>
+        I wanted to baseline this to that of another political figure and chose Barack Obama. As seen through his tweets' sentiment analysis, 
+        Barack Obama's tweets also deviate from neutral sentiment frequently but not with as much magnitude as Trump's. Diving more into the 
+        content of his positive and negative tweets, I saw that Obama's tweets were more remorseful towards victims and sad versus angry and bitter. Below are 
+        examples of his tweets and emotional valence. Political figures tend to show more variation in sentiment.
+    </p>
+    <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
+    <h3 class="title is-6">Barack Obama's Diverse Tweets</h3>
+    <h4 class="subtitle is-6">One tweet he's grateful and happy, another tweet he is sassy and angry.</h4>
+    <div class="flexrow">
+        <div>
+            <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Happy Mother&#39;s Day to my love and partner on this journey <a href="https://twitter.com/MichelleObama?ref_src=twsrc%5Etfw">@MichelleObama</a>, and to all the wonderful, hardworking mothers out there.</p>&mdash; Barack Obama (@BarackObama) <a href="https://twitter.com/BarackObama/status/863756100948156416?ref_src=twsrc%5Etfw">May 14, 2017</a></blockquote>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>  
+        </div>
+        <div>
+            <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">We grieve with all the families in Sutherland Springs harmed by this act of hatred, and we’ll stand with the survivors as they recover...</p>&mdash; Barack Obama (@BarackObama) <a href="https://twitter.com/BarackObama/status/927337524808347648?ref_src=twsrc%5Etfw">November 6, 2017</a></blockquote>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>                
+        </div>
+    </div>
+    <div class="spacer-3em"></div>
+    <div>
+        <h3 class="title is-6">Barack Obama's Tweet Sentiments</h3>
+        <h4 class="subtitle is-6">Varying sentiments of remorse and joy</h4>
+        <img src="bo_sentiment.png" style="width:700px"/>
+    </div>
+    <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
+    <h2 class="title is-5">What do Presidents tweet about?</h2>
+    <div class="card-container">
+        <img src="dt.gif" style="width: 300px; height: 200px;">
+        <p style="width: 700px">
+            I executed an LDA analysis on various topics these accounts discuss. Political figures showed 
+            more variation in their topics in comparison to pop culture idols. Below shows the defined topics and 
+            key words for each topic. Topics were chosen to be mutually exclusive and comprehensively exhaustive.
+        </p>
+    </div>
+    <div class="spacer-3em"></div>
+    <h3 class="title is-6">Trump's Tweet Topics</h3>
+    <h4 class="subtitle is-6">Defined and clustered by LDA with top 4 words</h4>
+    <table class="table is-bordered">
+        <thead>
+                <tr>
+                    <th>Hot &amp; Controversial Topics</th>
+                    <th>International Relations</th>
+                    <th>MAGA</th>
+                </tr>
+                <tr>
+                    <td><a href="https://twitter.com/realDonaldTrump/status/987766033862873091">Democrat</a></td>
+                    <td><a href="https://twitter.com/realDonaldTrump/status/989144989690187776">Trade</a></td>
+                    <td><a href="https://twitter.com/realDonaldTrump/status/988856839893897222">Great</a></td>
+                </tr>
+                <tr>
+                    <td><a href="https://twitter.com/realDonaldTrump/status/953794085751574534">Fake</a></td>
+                    <td><a href="https://twitter.com/realDonaldTrump/status/984828878060335109">Job</a></td>
+                    <td><a href="https://twitter.com/realDonaldTrump/status/989225812166696960">Thank</a></td>
+                </tr>
+                <tr>
+                    <td><a href="https://twitter.com/realDonaldTrump/status/986576502358671361">Russia</a></td>
+                    <td><a href="https://twitter.com/realDonaldTrump/status/988126197619068928">Deal</a></td>
+                    <td><a href="https://twitter.com/realDonaldTrump/status/983698762760704000">Honor</a></td>
+                </tr>
+                <tr>
+                    <td><a href="https://twitter.com/realDonaldTrump/status/988413372298416128">Border</a></td>
+                    <td><a href="https://twitter.com/realDonaldTrump/status/986301228337508354">Meet</a></td>
+                    <td><a href="https://twitter.com/realDonaldTrump/status/988056354567917568">Trump</a></td>
+                </tr>
+        </thead>
+    </table>
+    <div class="spacer-3em"></div>
+    <h3 class="title is-6">Obama's Tweet Topics</h3>
+    <h4 class="subtitle is-6">Defined and clustered by LDA with top 4 words</h4>
+    <table class="table is-bordered">
+        <thead>
+                <tr>
+                    <th>Unifying America</th>
+                    <th>Social Issues</th>
+                    <th>Supreme Court</th>
+                </tr>
+                <tr>
+                    <td>America</td>
+                    <td>Climate</td>
+                    <td>Supreme</td>
+                </tr>
+                <tr>
+                    <td>Join</td>
+                    <td>Job</td>
+                    <td>Court</td>
+                </tr>
+                <tr>
+                    <td>One</td>
+                    <td>Help</td>
+                    <td>Justice</td>
+                </tr>
+                <tr>
+                    <td>Team</td>
+                    <td>Fight</td>
+                    <td>Garland</td>
+                </tr>
+        </thead>
+    </table>
+    <div class="spacer-3em"></div>
+    <p>
+        With the limitations of the Twitter API as well as most of the chosen users' contents contaminated with 
+        sponsored promotional content, it was difficult to emerge with a variety of topics. For example, Katy Perry's 
+        tweets showed to be only promotional content for American Idol. 
+        Given the limited topics, it was difficult to do a compare &amp; contrast analysis across types of users but 
+        interesting to see the clean cut topics among political figures. Political figures seem to be more dynamic in their 
+        topics in comparison to pop culture figures.
+    </p>
+    <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
     <h2 class="title is-5">Next Steps</h2>
     <p>
         Compare &amp; contrast LDA topics (use them as factors for the model), building models with predictor variables 
