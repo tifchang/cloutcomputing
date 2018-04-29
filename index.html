@@ -31,8 +31,7 @@
         How does Trump gain followers and so much engagement on Twitter? What specifically about his posts are engaging 
         and have contributed to his dominant Twitter following? This analysis aims to uncover
         the truth and reveal tactics underlying his tweets. Through this analysis, I also hope to reveal patterns, similaries, and 
-        differences between Trump's tweets and other high performing users. At the end, I will discuss a model that shows 
-        the correlation between his tweets and the predictive power it has on his approval ratings.
+        differences between Trump's tweets and other high performing users. 
     </p>
     <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
     <h2 class="title is-5">Data Sources</h2>
@@ -52,7 +51,7 @@
         Looking into sentiment analysis across various users' tweets, I gained a broader understanding of the emotions 
         users conveyed through their tweets. Intuitively, people would gravitate towards tweets that were either informative or 
         made them feel good (positive/uplifting). But this analysis proves otherwise. <br><br>
-        First, I noticed that pop culture icons like Katy Perry and Kim Kardashian focus on promotional tweets, positive 
+        First, I analyzed pop culture icons like Katy Perry and Kim Kardashian and showed that they focus on promotional tweets, positive 
         personal tweets, or uplifting feel-good tweets (cheesy one-liner life wisdom quotes). These tweets, especially the 
         personal tweets, have performed highest.
     </p>
@@ -102,7 +101,7 @@
     <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
     <p>
         However, Donald Trump's recent debut on Twitter in the past year has introduced a new dynamic of Twitter usage that has 
-        gained traction. The transparency with his thoughts and emotions has garnered traction to his platform. Social media 
+        gained interest. The transparency with his thoughts and emotions has garnered traction to his platform. Social media 
         has been criticized to be a platform for perfected perceptions put up by users. However, Trump gains traction through his dynamic 
         sentiment and candor. As seen through the sentiment analysis, Trump exhibits a wider range and frequency of fluctuting emotional valence.
     </p>
@@ -159,7 +158,7 @@
         <p style="width: 700px">
             I executed an LDA analysis on various topics these accounts discuss. Political figures showed 
             more variation in their topics in comparison to pop culture idols. Below shows the defined topics and 
-            key words for each topic. Topics were chosen to be mutually exclusive and comprehensively exhaustive.
+            key words for each topic. Topics were chosen to be mutually exclusive and exhaustive.
         </p>
     </div>
     <div class="spacer-3em"></div>
@@ -246,7 +245,11 @@
             given specific keywords as well as other factors such as links and that week's approval rating. However, after trying various models, 
             I could not emerge with a model that had strong predictive power. <br><br>
             I ran a linear and KNN model with Retweet Count as the dependent variable and a selection of keywords and other observed variables as 
-            independent variables. All models had poor RMSE values; the linear model had the lowest RMSE value at 7318.424, while KNN was 7471.77. 
+            independent variables. Variables were chosen to be in the model if they provided significant explanatory power. This was determined by the 
+            p values of the variables as coefficients in the regression.
+
+            
+            All models had poor RMSE values; the linear model had the lowest RMSE value at 7318.424, while KNN was 7471.77. 
             The residual plots are shown below. 
     </p>
     <div class="spacer-3em"></div>
