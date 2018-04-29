@@ -158,6 +158,9 @@ dtm = removeSparseTerms(dtm, .990)
 dtm_matrix = as.matrix(dtm)
 View(dtm_matrix)
 
+v = sort(colSums(dtm_matrix), decreasing=T)
+head(v, 10) 
+
 dsentiment.avg = mean(get_sentiment(ddf$Content, method="afinn"))
 dsentiment = get_sentiment(ddf$Content, method="afinn")
 ds_df = as.data.frame(dsentiment)
@@ -167,8 +170,21 @@ ggplot(ds_df, aes(x=Tweet, y=Emotion)) + geom_point() + stat_smooth(colour="#C6F
 dt_ldaOut <-LDA(dtm_matrix, 3, method="Gibbs")
 terms(dt_ldaOut, 10)
 
+ddf$lcontent = tolower(ddf$Content)
+ddf$korea = ifelse(str_detect(ddf$lcontent, "korea"), 1, 0)
+ddf$north = ifelse(str_detect(ddf$lcontent, "north"), 1, 0)
+ddf$witch = ifelse(str_detect(ddf$lcontent, "witch"), 1, 0)
+ddf$maga = ifelse(str_detect(ddf$lcontent, "maga"), 1, 0)
+ddf$democrat = ifelse(str_detect(ddf$lcontent, "democrat"), 1, 0)
+ddf$fake = ifelse(str_detect(ddf$lcontent, "fake"), 1, 0)
+ddf$russia = ifelse(str_detect(ddf$lcontent, "russia"), 1, 0)
+ddf$border = ifelse(str_detect(ddf$lcontent, "border"), 1, 0)
+ddf$america = ifelse(str_detect(ddf$lcontent, "america"), 1, 0)
+test$great = ifelse(str_detect(ddf$lcontent, "great"), 1, 0)[264:330]
 
 #Donald Trump Tweet Model
+dates = read.csv("dates.csv", sep = ",")
+ddf$Approval = dates$Approval
 par = read.csv("par.csv", sep = ",")
 pardf = as.data.frame(par)
 View(pardf)
@@ -180,9 +196,9 @@ View(ddf)
 for (i in 1:nrow(ddf)) {
   for (j in 1:nrow(pardf)) {
     if ((as.numeric(ddf$Created[i]) <= as.numeric(pardf$UnixEnd[j]))) {
-      print("IN THIS 1")
+      print("Created <= UnixEnd")
       if ((as.numeric(ddf$Created[i]) >= as.numeric(pardf$UnixStart[j]))) {
-        print("IN THIS 2")
+        print("Created >= UnixStart")
         ddf$PAR_A[i] = pardf$Approve[j]
         break
       }
@@ -190,10 +206,60 @@ for (i in 1:nrow(ddf)) {
   }
 }
 
-dt_mega = dt_mega[complete.cases(dtm_matrix), ]
-train = droplevels(head(dt_mega, nrow(dt_mega) * 0.8))
-test = droplevels(tail(dt_mega, nrow(dt_mega) * 0.2))
+# Clean df for analysis
+train = droplevels(head(ddf, nrow(ddf) * 0.8))
+train$Content = NULL
+train$lcontent = NULL
+train$Author = NULL
+test = droplevels(tail(ddf, nrow(ddf) * 0.2))
+test$Content = NULL
+test$lcontent = NULL
+test$Author = NULL
 
-rf = randomForest(`Retweet Count` ~ ., data = train)
+# Linear model
+# RMSE: 7318.424
+lm = lm(data = train, as.numeric(as.character(`Retweet Count`)) ~ as.numeric(korea) + as.numeric(russia) + as.numeric(democrat))
+lm$coefficients
+summary(lm) 
+prev = predict(lm, test)
+test$Outcomes = prev
+test$i = c(1:nrow(test))
+View(test)
+RMSE(as.numeric(as.character(test$Outcomes)), as.numeric(as.character(test$`Retweet Count`)))
+ggplot(test, aes(x=i, y=resid)) + geom_point() + geom_segment(aes(x = 0, y = 0, xend = 70, yend = 0))
 
-dim(train)
+
+# KNN Out of sample
+# RMSE: 7471.77
+kmodel = knn(train, test, train$`Retweet Count`, k=3)
+test$KNN = kmodel
+RMSE(as.numeric(as.character(test$KNN)), as.numeric(as.character(test$`Retweet Count`)))
+test$residk = as.numeric(as.character(test$KNN)) - as.numeric(as.character(test$`Retweet Count`))
+test$KNN = NULL
+ggplot(test, aes(x=i, y=residk)) + geom_point() + geom_segment(aes(x = 0, y = 0, xend = 70, yend = 0))
+
+# KNN In sample
+# RMSE: 9072.392
+kmodel1 = knn(train, train, as.numeric(as.character(train$`Retweet Count`)), k=3)
+train$KNN = cbind(kmodel1)
+train$i = c(1:nrow(train))
+RMSE(as.numeric(as.character(train$KNN)), as.numeric(as.character(train$`Retweet Count`)))
+train$KNN = NULL
+train$resid = as.numeric(as.character(train$KNN)) - as.numeric(as.character(train$`Retweet Count`))
+ggplot(train, aes(x=i, y=resid)) + geom_point() + geom_segment(aes(x = 0, y = 0, xend = 270, yend = 0))
+
+rf = randomForest(as.numeric(`Retweet Count`) ~ gre + gpa + rank, data=train)
+
+
+out = data.frame(ddf$Created)
+names(out) = c("Created") 
+write.csv(out, "dates.csv") 
+help(knn)
+out1 = data.frame(pardf$UnixStart, pardf$UnixEnd, pardf$Approve)
+names(out1) = c("Start", "End", "Approve") 
+write.csv(out1, "parse.csv") 
+
+
+RMSE <- function(predict,actual){  
+  sqrt(mean((predict - actual)^2)) 
+}

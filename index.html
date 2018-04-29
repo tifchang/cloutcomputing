@@ -29,11 +29,10 @@
     <h2 class="title is-5">Introduction</h2>
     <p>
         How does Trump gain followers and so much engagement on Twitter? What specifically about his posts are engaging 
-        and have contributed to their dominant Twitter following? This analysis aims to uncover
-        the truth and reveal tactics underlying his tweets. Through this analysis, I hope to reveal patterns, similaries, and 
-        differences in their Twitter usage and content that contribute to the user's success. At the end, I will build a 
-        model to predict the popularity of Trump's tweet given a hypothetical string. You will also get a shot to see if your 
-        Trump tweet scores well.
+        and have contributed to his dominant Twitter following? This analysis aims to uncover
+        the truth and reveal tactics underlying his tweets. Through this analysis, I also hope to reveal patterns, similaries, and 
+        differences between Trump's tweets and other high performing users. At the end, I will discuss a model that shows 
+        the correlation between his tweets and the predictive power it has on his approval ratings.
     </p>
     <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
     <h2 class="title is-5">Data Sources</h2>
@@ -241,17 +240,37 @@
         topics in comparison to pop culture figures.
     </p>
     <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
-    <h2 class="title is-5">Does Twitter clout convert to Approval Ratings?</h2>
+    <h2 class="title is-5">Forecasting Trump's Tweets</h2>
     <p>
-        Build model out of Trump's words, and other factors
+            Going into model building, I initially wanted to build a model that would predict the Presidential Approval Rating for 
+            Trump based off data extracted from his tweets, both observed and underlying statistics about the tweet (i.e., number of retweets, sentiment, etc.). 
+            However, given the constraints of the Twitter API, I was not able to pull tweets from a larger variety of weeks. Therefore, the 
+            Presidential Approval Rating (which is calculated by week) were the same for each week (and did not vary much from week to week) and 
+            were not as interesting to predict given the constraints. Therefore, I wanted to build a model that would predict a tweet's performance 
+            given specific keywords as well as other factors such as links and that week's approval rating. However, after trying various models, 
+            I could not emerge with a model that had strong predictive power. <br><br>
+            I ran a linear and KNN model with Retweet Count as the dependent variable and a selection of keywords and other observed variables as 
+            independent variables. All models had poor RMSE values; the linear model had the lowest RMSE value at 7318.424, while KNN was 7471.77. 
+            The residual plots are shown below. 
+    </p>
+    <div class="spacer-3em"></div>
+    <h3 class="title is-6">Errors across Models</h3>
+    <h4 class="subtitle is-6">Linear (Left) vs. KNN (Right)</h4>
+    <div class="flexrow">
+        <img src="lin_resid.png" style="width: 525px; height: 325px;"/>
+        <img src="knn_resid.png" style="width: 525px; height: 325px;"/>
+    </div>
+    <p> <br>
+        While the linear model shows lower RMSE, the model seem to be always overshooting the true values. On the other hand, the KNN model 
+        shows variation around the true value as certain predictions are nearly spot on while others are drastically off in either direction. 
+        Unfortunately, the models were not accurate enough to predict retweets.
     </p>
     <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
-    <h2 class="title is-5">Next Steps</h2>
+    <h2 class="title is-5">Conclusion</h2>
     <p>
-        Compare &amp; contrast LDA topics (use them as factors for the model), building models with predictor variables 
-        (links, sentiment, date, gTrends high/low, Presidential Approval Ratings, promo/not promo). Expand 
-        analysis to other accounts. I want to build a model so I can generate tweets for each type of 
-        person that would score high. 
+        Trump has a strong and controversial personality. However, this energy has gained significant attention on Twitter. On Google trends, 
+        Trump's popularity and internet interest is roughly 10x that of Katy Perry, Kim Kardashian and Obama. His dynamic sentiments and controversial 
+        content keep our feeds interesting and never fails to engage, whether good or bad.
     </p>
     <div class="spacer-5em"></div>
     <p style="text-align: center; color:slategrey; margin-bottom: 30px">
