@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
   <link href="https://fonts.googleapis.com/css?family=Lora:400,400i|Playfair+Display|Sumana" rel="stylesheet">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="./bin/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./bin/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./bin/favicon-16x16.png">
+  <link rel="manifest" href="./bin/site.webmanifest">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
 </head>
@@ -88,13 +88,13 @@
             <div class="spacer-3em"></div>
             <h3 class="title is-6">Kim Kardashian's Tweet Sentiments</h3>
             <h4 class="subtitle is-6">Sentiment analysis of Kim Kardashian's tweets over time.</h4>
-            <img src="kk_sentiment.png" style="width:500px"/>
+            <img src="./bin/kk_sentiment.png" style="width:500px"/>
         </div>
         <div>
             <div class="spacer-3em"></div>
             <h3 class="title is-6">Katy Perry's Tweet Sentiments</h3>
             <h4 class="subtitle is-6">Sentiment analysis of Katy Perry's tweets over time.</h4>
-            <img src="jb_sentiment.png" style="width:500px"/>
+            <img src="./bin/jb_sentiment.png" style="width:500px"/>
         </div>
     </div>  
     <p style="font-size: 12px; color: #7b7b7b">Katy Perry's one extremely low sentiment <a href="https://twitter.com/katyperry/status/914957859170988033">tweet</a> can be explained by her disgust towards the school shooting.</p>
@@ -122,7 +122,7 @@
     <div>
         <h3 class="title is-6">Donald Trump's Tweet Sentiments</h3>
         <h4 class="subtitle is-6">Volatile and polar sentiments</h4>
-        <img src="dt_sentiment.png" style="width:700px"/>
+        <img src="./bin/dt_sentiment.png" style="width:700px"/>
     </div>
     <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
     <p>
@@ -148,13 +148,13 @@
     <div>
         <h3 class="title is-6">Barack Obama's Tweet Sentiments</h3>
         <h4 class="subtitle is-6">Varying sentiments of remorse and joy</h4>
-        <img src="bo_sentiment.png" style="width:700px"/>
+        <img src="./bin/bo_sentiment.png" style="width:700px"/>
     </div>
     <div class="spacer-3em"></div><hr><div class="spacer-3em"></div>
     <h2 class="title is-5">What do Presidents tweet about?</h2>
     <h4 class="subtitle is-6">Topics behind high performing political accounts</h4>
     <div class="card-container">
-        <img src="dt.gif" style="width: 300px; height: 220px;">
+        <img src="./bin/dt.gif" style="width: 300px; height: 220px;">
         <p style="width: 700px">
             I executed an LDA analysis on various topics these accounts discuss. Political figures showed 
             more variation in their topics in comparison to pop culture idols. Below shows the defined topics and 
@@ -256,8 +256,8 @@
     <h3 class="title is-6">Errors across Models</h3>
     <h4 class="subtitle is-6">Linear (Left) vs. KNN (Right)</h4>
     <div class="flexrow">
-        <img src="lin_resid.png" style="width: 525px; height: 325px;"/>
-        <img src="knn_resid.png" style="width: 525px; height: 325px;"/>
+        <img src="./bin/lin_resid.png" style="width: 525px; height: 325px;"/>
+        <img src="./bin/knn_resid.png" style="width: 525px; height: 325px;"/>
     </div>
     <p> <br>
         While the linear model shows lower RMSE, the model seem to be always overshooting the true values. On the other hand, the KNN model 
